@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+  <fullName>QueryDataCloud</fullName>
+  <description>Placeholder; returns an empty result today.</description>
+  <apexClass>DataCloudQueryApex</apexClass>
+  <inputs><name>concept</name><dataType>String</dataType></inputs>
+  <outputs><name>recordsJson</name><dataType>String</dataType></outputs>
+</GenAiFunction>

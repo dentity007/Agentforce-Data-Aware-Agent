@@ -1,0 +1,12 @@
+sequenceDiagram
+  actor U
+  participant P as Planner
+  participant Q as ExecuteSOQL
+  participant FLS as FLS.enforce
+
+  U->>P: Ask for PII field (denied)
+  P->>Q: ExecuteSOQL(Lead,[Email,SSN__c],...)
+  Q->>FLS: enforce('Lead',[Email,SSN__c])
+  FLS-->>Q: [Email] // SSN__c removed
+  Q-->>P: Records without SSN__c
+  P-->>U: Answer provided; notes that sensitive fields are not accessible

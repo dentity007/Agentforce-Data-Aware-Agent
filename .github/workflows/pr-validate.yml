@@ -1,0 +1,39 @@
+name: PR Validate (Scratch Org)
+on:
+  pull_request: { branches: [ main, master ] }
+  workflow_dispatch:
+permissions: { contents: read }
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      SCRATCH_ALIAS: ci-${{ github.run_id }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm install --global @salesforce/cli
+      - run: sf --version
+      - name: Write JWT key
+        run: echo "$SF_JWT_KEY" > server.key && chmod 600 server.key
+        env: { SF_JWT_KEY: ${{ secrets.SF_JWT_KEY }} }
+      - name: Authenticate Dev Hub (JWT)
+        env:
+          SF_CONSUMER_KEY: ${{ secrets.SF_CONSUMER_KEY }}
+          SF_USERNAME: ${{ secrets.SF_USERNAME }}
+        run: |
+          sf org login jwt --client-id "$SF_CONSUMER_KEY" --jwt-key-file server.key --username "$SF_USERNAME" --instance-url "https://login.salesforce.com" --alias devhub --set-default-dev-hub true
+      - name: Create Scratch Org
+        run: sf org create scratch --definition-file config/project-scratch-def.json --alias "$SCRATCH_ALIAS" --set-default --duration-days 1 --wait 10
+      - name: Push Source
+        run: sf project deploy start --target-org "$SCRATCH_ALIAS" --ignore-conflicts --wait 30
+      - name: Assign Permission Set
+        run: sf org assign permset --name GenAIAgentPermission --target-org "$SCRATCH_ALIAS" || echo "Permset skipped"
+      - name: Run Apex Tests (JUnit)
+        run: mkdir -p test-results && sf apex run test --target-org "$SCRATCH_ALIAS" --result-format junit --code-coverage --output-dir test-results --wait 30
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: apex-junit, path: test-results }
+      - if: always()
+        run: sf org delete scratch --target-org "$SCRATCH_ALIAS" --no-prompt

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+  <fullName>ExecuteSOQL</fullName>
+  <description>Executes a safe SOQL query under user FLS/sharing.</description>
+  <apexClass>SafeQueryApex</apexClass>
+  <inputs>
+    <name>objectApiName</name><dataType>String</dataType>
+    <name>fields</name><dataType>String</dataType>
+    <name>filters</name><dataType>String</dataType>
+    <name>limitSize</name><dataType>Number</dataType>
+  </inputs>
+  <outputs><name>recordsJson</name><dataType>String</dataType></outputs>
+</GenAiFunction>

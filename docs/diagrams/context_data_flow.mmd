@@ -1,0 +1,21 @@
+flowchart LR
+  User[Business User] -->|asks| Agent[Agentforce Bot]
+  Agent --> Planner[Planner Bundle]
+  Planner --> Plugin[Metadata Navigator Plugin]
+  Planner --> Fn[GenAi Functions]
+  Fn --> Apex[Apex Services]
+  Fn --> Flow[Autolaunched Flows]
+  Apex --> SFDC[(Salesforce Core Data)]
+  Flow --> SFDC
+  Apex --> Graph[SchemaGraph__c]
+  Plugin --> Graph
+  subgraph Salesforce Org
+    Agent
+    Planner
+    Plugin
+    Fn
+    Apex
+    Flow
+    Graph
+    SFDC
+  end

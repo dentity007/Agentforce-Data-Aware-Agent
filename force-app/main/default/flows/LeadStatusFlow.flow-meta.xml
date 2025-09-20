@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+  <apiVersion>64.0</apiVersion>
+  <label>Lead Status Flow</label>
+  <processType>AutoLaunchedFlow</processType>
+  <status>Active</status>
+  <variables><name>LeadId</name><dataType>String</dataType><isCollection>false</isCollection><isInput>true</isInput><isOutput>false</isOutput></variables>
+  <variables><name>NewStatus</name><dataType>String</dataType><isCollection>false</isCollection><isInput>true</isInput><isOutput>false</isOutput></variables>
+  <recordUpdates>
+    <name>Update_Lead_Status</name>
+    <connector><targetReference>END</targetReference></connector>
+    <filters><field>Id</field><operator>EqualTo</operator><value>{!LeadId}</value></filters>
+    <inputAssignments><field>Status</field><value>{!NewStatus}</value></inputAssignments>
+    <object>Lead</object>
+  </recordUpdates>
+  <start><locationX>50</locationX><locationY>50</locationY><connector><targetReference>Update_Lead_Status</targetReference></connector></start>
+</Flow>

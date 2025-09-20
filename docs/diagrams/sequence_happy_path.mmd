@@ -1,0 +1,30 @@
+sequenceDiagram
+  autonumber
+  actor U as User
+  participant B as Bot (Agent)
+  participant P as Planner
+  participant M as MetadataNavigator
+  participant Q as ExecuteSOQL
+  participant F as Flow: LeadStatusFlow
+  participant X as Apex: FollowUpApex
+  participant S as Salesforce Data
+  participant G as SchemaGraph__c
+
+  U->>B: "Qualify lead 00Q...; set status Working"
+  B->>P: UserGoal
+  P->>M: FindObjects('lead qualification')
+  M->>G: Load graph
+  M-->>P: ["Lead"]
+  P->>M: FindFields('Lead','qualification score,email,status')
+  M-->>P: ["Score__c","Email","Status","LastPurchaseDate__c"]
+  P->>Q: ExecuteSOQL(Lead, fields, filters, limit=50)
+  Q->>S: SELECT ... FROM Lead WHERE ...
+  S-->>Q: records
+  P->>F: UpdateLeadStatusAction(LeadId, NewStatus='Working')
+  F->>S: Update Lead.Status
+  S-->>F: OK
+  P->>X: TriggerFollowUpAction(LeadId, Channel='Task')
+  X->>S: insert Task(WhoId=LeadId,...)
+  S-->>X: TaskId
+  P-->>B: summary + sources (objects/fields)
+  B-->>U: "Status updated; Task created; used Lead.Status, Lead.Email, Lead.Score__c"

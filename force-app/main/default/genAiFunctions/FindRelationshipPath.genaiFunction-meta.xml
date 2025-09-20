@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+  <fullName>FindRelationshipPath</fullName>
+  <description>Finds a simple relationship path between two objects.</description>
+  <apexClass>MetadataNavigatorApex</apexClass>
+  <inputs>
+    <name>sourceObject</name><dataType>String</dataType>
+    <name>targetObject</name><dataType>String</dataType>
+  </inputs>
+  <outputs><name>pathJson</name><dataType>String</dataType></outputs>
+</GenAiFunction>

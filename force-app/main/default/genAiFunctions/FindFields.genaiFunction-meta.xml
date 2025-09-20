@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+  <fullName>FindFields</fullName>
+  <description>Returns likely fields on an object for a concept.</description>
+  <apexClass>MetadataNavigatorApex</apexClass>
+  <inputs>
+    <name>objectApiName</name><dataType>String</dataType>
+    <name>concept</name><dataType>String</dataType>
+  </inputs>
+  <outputs><name>fieldsJson</name><dataType>String</dataType></outputs>
+</GenAiFunction>

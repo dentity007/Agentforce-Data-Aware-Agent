@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bot xmlns="http://soap.sforce.com/2006/04/metadata">
+  <fullName>AutoDataAwareBot</fullName>
+  <description>Agent that learns the org’s schema and queries safely.</description>
+  <label>Data Aware Agent</label>
+  <status>Active</status>
+</Bot>

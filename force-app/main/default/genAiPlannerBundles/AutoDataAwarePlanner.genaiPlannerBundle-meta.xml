@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlannerBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+  <fullName>AutoDataAwarePlanner</fullName>
+  <instructions>
+    1) Interpret user goal.
+    2) Call FindObjects/FindFields to identify data sources (respect FLS).
+    3) If cross-object, call FindRelationshipPath to build joins.
+    4) Build a minimal field set; avoid PII unless explicitly requested and permitted.
+    5) Call ExecuteSOQL or QueryDataCloud.
+    6) Summarize results, cite objects/fields used.
+  </instructions>
+  <modelName>gpt-4o</modelName>
+  <topics><fullName>MetadataNavigatorTopic</fullName></topics>
+  <actions>
+    <fullName>FindObjects</fullName>
+    <fullName>FindFields</fullName>
+    <fullName>FindRelationshipPath</fullName>
+    <fullName>ExecuteSOQL</fullName>
+    <fullName>RunFlow</fullName>
+    <fullName>QueryDataCloud</fullName>
+    <fullName>UpdateLeadStatusAction</fullName>
+    <fullName>TriggerFollowUpAction</fullName>
+  </actions>
+  <promptTemplate>DataAwarePrompt</promptTemplate>
+</GenAiPlannerBundle>

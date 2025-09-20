@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlugin xmlns="http://soap.sforce.com/2006/04/metadata">
+  <fullName>MetadataNavigatorTopic</fullName>
+  <description>Find objects, fields, and relationship paths using cached schema graph.</description>
+  <instructions>
+    Use FindObjects, FindFields, and FindRelationshipPath to discover data sources before querying.
+  </instructions>
+</GenAiPlugin>

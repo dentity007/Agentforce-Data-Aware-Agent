@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BotVersion xmlns="http://soap.sforce.com/2006/04/metadata">
+  <fullName>AutoDataAwareBot_v1</fullName>
+  <bot>AutoDataAwareBot</bot>
+  <description>Bootstraps schema graph and uses planner to query data.</description>
+  <status>Active</status>
+  <conversationVariables><fullName>UserGoal</fullName><dataType>String</dataType></conversationVariables>
+  <conversationVariables><fullName>SchemaSlice</fullName><dataType>String</dataType></conversationVariables>
+</BotVersion>

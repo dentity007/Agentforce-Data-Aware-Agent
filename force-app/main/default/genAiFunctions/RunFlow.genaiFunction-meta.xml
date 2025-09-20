@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+  <fullName>RunFlow</fullName>
+  <description>Runs an autolaunched Flow with inputs.</description>
+  <flow>LeadStatusFlow</flow>
+  <inputs>
+    <name>LeadId</name><dataType>String</dataType>
+    <name>NewStatus</name><dataType>String</dataType>
+  </inputs>
+  <outputs><name>Result</name><dataType>String</dataType></outputs>
+</GenAiFunction>
