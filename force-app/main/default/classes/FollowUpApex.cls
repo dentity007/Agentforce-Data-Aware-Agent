@@ -11,8 +11,8 @@ public class FollowUpApex {
     public class Output {
         @InvocableVariable(label='Success')
         public Boolean Success;
-        @InvocableVariable(label='Task ID')
-        public Id TaskId;
+        @InvocableVariable(label='Message')
+        public String Message;
     }
 
     @InvocableMethod(label='Create Follow-Up' description='Creates a follow-up task for the lead')
@@ -29,9 +29,10 @@ public class FollowUpApex {
                 t.Description = 'Automated follow-up via GenAI Agent';
                 insert t;
                 out.Success = true;
-                out.TaskId = t.Id;
+                out.Message = 'Task created successfully';
             } catch (Exception e) {
                 out.Success = false;
+                out.Message = e.getMessage();
             }
             outputs.add(out);
         }

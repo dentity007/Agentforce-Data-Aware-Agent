@@ -25,8 +25,4 @@
         <object>SchemaGraph__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
-    <userPermissions>
-        <enabled>true</enabled>
-        <name>GenAiAgent</name>
-    </userPermissions>
 </PermissionSet>

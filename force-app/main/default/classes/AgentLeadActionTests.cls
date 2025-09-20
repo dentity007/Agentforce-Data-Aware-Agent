@@ -7,7 +7,7 @@ private class AgentLeadActionTests {
         List<FollowUpApex.Output> outs = FollowUpApex.execute(new List<FollowUpApex.Input>{in1});
         System.assertEquals(1, outs.size());
         System.assert(outs[0].Success);
-        System.assertNotEquals(null, outs[0].TaskId);
+        System.assertNotEquals(null, outs[0].Message);
     }
     @IsTest static void testLeadQualificationAction_updatesOrHandlesError(){
         Lead l1 = makeLead();

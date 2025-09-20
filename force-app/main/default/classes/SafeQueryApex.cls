@@ -1,9 +1,9 @@
 public class SafeQueryApex {
-    public static String ExecuteSOQL(String objectName, String fieldsJson, String whereClause, Integer limitRecords) {
-        List<String> fields = (List<String>) JSON.deserialize(fieldsJson, List<String>.class);
+    public static String ExecuteSOQL(String objectApiName, String fields, String filters, Integer limitSize) {
         // Enforce FLS
-        fields = FLS.enforce(objectName, fields);
-        String query = SOQLBuilder.build(objectName, fields, whereClause, limitRecords);
+        List<String> fieldList = (List<String>) JSON.deserialize(fields, List<String>.class);
+        fieldList = FLS.enforce(objectApiName, fieldList);
+        String query = SOQLBuilder.build(objectApiName, fieldList, filters, limitSize);
         List<SObject> records = Database.query(query);
         return JSON.serialize(records);
     }
