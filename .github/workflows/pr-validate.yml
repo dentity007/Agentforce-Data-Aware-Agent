@@ -17,7 +17,8 @@ jobs:
       - run: sf --version
       - name: Write JWT key
         run: echo "$SF_JWT_KEY" > server.key && chmod 600 server.key
-        env: { SF_JWT_KEY: ${{ secrets.SF_JWT_KEY }} }
+        env:
+          SF_JWT_KEY: ${{ secrets.SF_JWT_KEY }}
       - name: Authenticate Dev Hub (JWT)
         env:
           SF_CONSUMER_KEY: ${{ secrets.SF_CONSUMER_KEY }}
