@@ -2,7 +2,8 @@ name: PR Validate (Scratch Org)
 on:
   pull_request: { branches: [ main, master ] }
   workflow_dispatch:
-permissions: { contents: read }
+permissions:
+  contents: read
 jobs:
   validate:
     runs-on: ubuntu-latest
@@ -12,7 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: '20' }
+        with:
+          node-version: '20'
       - run: npm install --global @salesforce/cli
       - run: sf --version
       - name: Write JWT key
@@ -35,6 +37,8 @@ jobs:
         run: mkdir -p test-results && sf apex run test --target-org "$SCRATCH_ALIAS" --result-format junit --code-coverage --output-dir test-results --wait 30
       - uses: actions/upload-artifact@v4
         if: always()
-        with: { name: apex-junit, path: test-results }
+        with:
+          name: apex-junit
+          path: test-results
       - if: always()
         run: sf org delete scratch --target-org "$SCRATCH_ALIAS" --no-prompt
