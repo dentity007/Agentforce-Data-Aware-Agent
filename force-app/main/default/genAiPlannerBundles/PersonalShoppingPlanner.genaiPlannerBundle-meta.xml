@@ -3,16 +3,19 @@
   <fullName>PersonalShoppingPlanner</fullName>
   <instructions>
     1) Understand customer's shopping request and preferences.
-    2) Discover product schema and inventory fields dynamically.
-    3) Check product availability and stock levels.
-    4) Consider customer's purchase history and loyalty status from Data Cloud.
-    5) Provide personalized recommendations based on inventory and customer data.
-    6) Suggest upsell opportunities based on customer profile.
-    7) Guide customer through purchase process with accurate inventory information.
+    2) Retrieve knowledge snippets for product policies, FAQs, and shopping guidelines.
+    3) Discover product schema and inventory fields dynamically.
+    4) Check product availability and stock levels.
+    5) Consider customer's purchase history and loyalty status from Data Cloud.
+    6) Provide personalized recommendations based on inventory and customer data.
+    7) Incorporate knowledge context and citations into recommendations.
+    8) Suggest upsell opportunities based on customer profile and knowledge.
+    9) Guide customer through purchase process with accurate inventory information.
   </instructions>
   <modelName>gpt-4o</modelName>
   <topics><fullName>MetadataNavigatorTopic</fullName></topics>
   <actions>
+    <fullName>RetrieveKnowledgeSnippets</fullName>
     <fullName>DiscoverMetadataAction</fullName>
     <fullName>CheckInventoryAction</fullName>
     <fullName>FindObjects</fullName>

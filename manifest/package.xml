@@ -1,26 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
-  <types><members>*</members><name>ApexClass</name></types>
-  <types><members>SchemaGraph__c</members><name>CustomObject</name></types>
-  <types><members>RestrictedField__mdt</members><name>CustomMetadata</name></types>
-  <types><members>GenAIAgentPermission</members><name>PermissionSet</name></types>
-  <types><members>ToolingApi</members><name>NamedCredential</name></types>
-  <types><members>AutoDataAwareBot</members><name>Bot</name></types>
-  <types><members>AutoDataAwareBot_v1</members><name>BotVersion</name></types>
-  <types><members>AutoDataAwarePlanner</members><name>GenAiPlannerBundle</name></types>
-  <types><members>MetadataNavigatorTopic</members><name>GenAiPlugin</name></types>
   <types>
-    <members>FindObjects</members>
-    <members>FindFields</members>
-    <members>FindRelationshipPath</members>
+    <members>KnowledgeRetrieverApex</members>
+    <members>KnowledgeRetrieverApex_Test</members>
+    <name>ApexClass</name>
+  </types>
+  <types>
+    <members>CheckInventoryAction</members>
+    <members>DiscoverMetadataAction</members>
     <members>ExecuteSOQL</members>
-    <members>RunFlow</members>
+    <members>FindFields</members>
+    <members>FindObjects</members>
+    <members>FindRelationshipPath</members>
     <members>QueryDataCloud</members>
-    <members>UpdateLeadStatusAction</members>
+    <members>RetrieveKnowledgeSnippets</members>
+    <members>RunFlow</members>
     <members>TriggerFollowUpAction</members>
+    <members>UpdateLeadStatusAction</members>
     <name>GenAiFunction</name>
   </types>
-  <types><members>LeadStatusFlow</members><name>Flow</name></types>
-  <types><members>DataAwarePrompt</members><name>PromptTemplate</name></types>
+  <types>
+    <members>AutoDataAwarePlanner</members>
+    <members>PersonalShoppingPlanner</members>
+    <name>GenAiPlannerBundle</name>
+  </types>
+  <types>
+    <members>AutoDataAwareBot</members>
+    <members>PersonalShoppingBot</members>
+    <name>Bot</name>
+  </types>
+  <types>
+    <members>AutoDataAwareBot_v1</members>
+    <members>PersonalShoppingBot_v1</members>
+    <name>BotVersion</name>
+  </types>
+  <types>
+    <members>LeadStatusFlow</members>
+    <name>Flow</name>
+  </types>
+  <types>
+    <members>MetadataNavigatorTopic</members>
+    <name>GenAiPlugin</name>
+  </types>
+  <types>
+    <members>DataAwarePrompt</members>
+    <members>LeadQualification</members>
+    <members>PersonalShoppingRecommendation</members>
+    <name>PromptTemplate</name>
+  </types>
+  <types>
+    <members>SchemaGraph__c</members>
+    <name>CustomObject</name>
+  </types>
+  <types>
+    <members>GenAIAgentPermission</members>
+    <name>PermissionSet</name>
+  </types>
   <version>64.0</version>
 </Package>

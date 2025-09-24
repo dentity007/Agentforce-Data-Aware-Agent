@@ -1,5 +1,7 @@
 # Unified Agentforce Data-Aware Solutions
 
+[![Agentforce: Data‑Aware Ready](https://img.shields.io/badge/Agentforce-Data%E2%80%91Aware%20Ready-00A1E0)](docs/data-library/SETUP.md)
+
 This repository contains **two complementary Salesforce DX projects** that demonstrate advanced AI agent capabilities with data awareness, schema discovery, and governance.
 
 ## 🎯 Projects Overview
@@ -23,7 +25,56 @@ This repository contains **two complementary Salesforce DX projects** that demon
   - Shopping cart management
 - **Use Case**: E-commerce, customer service
 
-## 🚀 Quick Start
+## 🧠 Knowledge-Grounded Capabilities
+
+Both agents now include **knowledge-grounded responses** using Salesforce Knowledge for RAG (Retrieval-Augmented Generation):
+
+### **Two Integration Paths:**
+
+#### **Path A: Agentforce Data Library (Recommended)**
+- Create a Data Library in Setup → Agentforce Data Library
+- Attach to agent's **"Answer Questions with Knowledge"** action
+- Automatic grounding with articles, files, and web sources
+- **[Setup Guide](docs/data-library/SETUP.md)**
+
+#### **Path B: Apex Fallback (Always Available)**
+- Uses `KnowledgeRetrieverApex` class for SOSL queries
+- Returns grounded snippets with citations
+- No Data Library required
+- **[Planner Instructions](docs/planner/PLANNER_INSTRUCTIONS.md)**
+
+### **Features:**
+- ✅ Dynamic schema discovery + knowledge grounding
+- ✅ Citations and source attribution
+- ✅ Fallback mechanisms for reliability
+- ✅ Org-agnostic configuration
+
+## � Reusable Prompt Templates
+
+The project includes **structured prompt templates** that enable schema-aware agent behaviors:
+
+### **Available Templates:**
+
+#### **LeadQualification.prompt**
+- **Purpose**: Intelligent lead qualification with dynamic schema discovery
+- **Features**: Picklist-aware status updates, task creation, FLS compliance
+- **Use Case**: Sales automation, lead scoring workflows
+
+#### **PersonalShoppingRecommendation.prompt**
+- **Purpose**: E-commerce product recommendations with inventory awareness
+- **Features**: Price filtering, stock checking, knowledge-grounded suggestions
+- **Use Case**: Customer service, personalized shopping assistance
+
+### **Key Benefits:**
+- 🔍 **Schema-Aware**: No hard-coded field names or SOQL
+- 🛡️ **Governed**: FLS and sharing rule compliance
+- 📚 **Knowledge-Integrated**: Works with Data Libraries and Knowledge articles
+- 🔄 **Portable**: Adapts to different org configurations
+- 📋 **Structured Output**: JSON blueprints for safe, auditable operations
+
+**[Complete Template Guide](docs/prompt-templates/README.md)**
+
+## �🚀 Quick Start
 
 ### Prerequisites
 - **Salesforce CLI** installed (`sf`)
@@ -42,7 +93,6 @@ sf org create scratch --definition-file config/project-scratch-def.json --alias 
 # Deploy and setup
 sf project deploy start --ignore-conflicts --wait 30
 sf org assign permset --name GenAIAgentPermission
-sf apex run --file scripts/apex/run_bootstrap.apex
 sf org open
 
 # Test: "Qualify this lead and follow up: 00Qxxxxxxxxxxxx; set status to Working"
@@ -109,6 +159,17 @@ sf org open -o DEV_ED
 ### Personal Shopping Assistant
 - **[Conversation Demo](docs/conversation-demo.md)**: Sample bot interactions
 - **[Session Guide](docs/today-session.md)**: Technical implementation details
+
+### Knowledge-Grounded Capabilities
+- **[Data Library Setup](docs/data-library/SETUP.md)**: Configure Agentforce Data Libraries
+- **[Planner Instructions](docs/planner/PLANNER_INSTRUCTIONS.md)**: Knowledge integration guidelines
+- **[Knowledge Integration Guide](docs/KNOWLEDGE_INTEGRATION_GUIDE.md)**: Complete technical implementation
+- **[Knowledge Addon README](README_DATA_AWARE_ADDON.md)**: Complete addon documentation
+
+### Prompt Templates
+- **[Prompt Templates Guide](docs/prompt-templates/README.md)**: Reusable schema-aware templates
+- **[Lead Qualification Template](docs/prompt-templates/README.md#leadqualificationprompt)**: Sales automation
+- **[Shopping Recommendation Template](docs/prompt-templates/README.md#personalshoppingrecommendationprompt)**: E-commerce assistance
 
 ## 🧪 Testing
 

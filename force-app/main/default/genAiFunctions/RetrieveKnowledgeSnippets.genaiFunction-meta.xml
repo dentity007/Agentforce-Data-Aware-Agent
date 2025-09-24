@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+  <fullName>RetrieveKnowledgeSnippets</fullName>
+  <description>Retrieves grounded knowledge snippets from Salesforce Knowledge for RAG context.</description>
+  <apexClass>KnowledgeRetrieverApex</apexClass>
+  <inputs>
+    <name>question</name><dataType>String</dataType>
+    <name>maxResults</name><dataType>Number</dataType>
+  </inputs>
+  <outputs>
+    <name>context</name><dataType>String</dataType>
+    <name>citationsJson</name><dataType>String</dataType>
+  </outputs>
+</GenAiFunction>
