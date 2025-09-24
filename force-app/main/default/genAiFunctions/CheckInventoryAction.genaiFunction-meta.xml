@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+  <fullName>CheckInventoryAction</fullName>
+  <description>Checks product inventory and availability using dynamic field discovery.</description>
+  <apexClass>InventoryCheckInvoker</apexClass>
+  <inputs>
+    <name>productId</name><dataType>String</dataType>
+    <name>category</name><dataType>String</dataType>
+  </inputs>
+  <outputs><name>inventoryResult</name><dataType>String</dataType></outputs>
+</GenAiFunction>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+  <types><members>PersonalShoppingPlanner</members><name>GenAiPlannerBundle</name></types>
+  <types><members>DiscoverMetadataAction</members><members>CheckInventoryAction</members><name>GenAiFunction</name></types>
+  <types><members>MetadataDiscoverApex</members><members>InventoryCheckInvoker</members><name>ApexClass</name></types>
+  <types><members>PersonalShoppingBot</members><name>Bot</name></types>
+  <types><members>PersonalShoppingBot_v1</members><name>BotVersion</name></types>
+  <version>64.0</version>
+</Package>

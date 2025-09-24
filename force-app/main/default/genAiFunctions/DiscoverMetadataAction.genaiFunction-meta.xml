@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+  <fullName>DiscoverMetadataAction</fullName>
+  <description>Discovers object schema and finds inventory-related fields dynamically.</description>
+  <apexClass>MetadataDiscoverApex</apexClass>
+  <inputs>
+    <name>objectName</name><dataType>String</dataType>
+  </inputs>
+  <outputs><name>schemaJson</name><dataType>String</dataType></outputs>
+</GenAiFunction>

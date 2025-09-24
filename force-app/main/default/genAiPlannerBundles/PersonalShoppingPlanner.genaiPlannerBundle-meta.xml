@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlannerBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+  <fullName>PersonalShoppingPlanner</fullName>
+  <instructions>
+    1) Understand customer's shopping request and preferences.
+    2) Discover product schema and inventory fields dynamically.
+    3) Check product availability and stock levels.
+    4) Consider customer's purchase history and loyalty status from Data Cloud.
+    5) Provide personalized recommendations based on inventory and customer data.
+    6) Suggest upsell opportunities based on customer profile.
+    7) Guide customer through purchase process with accurate inventory information.
+  </instructions>
+  <modelName>gpt-4o</modelName>
+  <topics><fullName>MetadataNavigatorTopic</fullName></topics>
+  <actions>
+    <fullName>DiscoverMetadataAction</fullName>
+    <fullName>CheckInventoryAction</fullName>
+    <fullName>FindObjects</fullName>
+    <fullName>FindFields</fullName>
+    <fullName>ExecuteSOQL</fullName>
+    <fullName>QueryDataCloud</fullName>
+  </actions>
+  <promptTemplate>DataAwarePrompt</promptTemplate>
+</GenAiPlannerBundle>

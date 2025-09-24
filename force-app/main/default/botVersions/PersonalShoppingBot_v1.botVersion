@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BotVersion xmlns="http://soap.sforce.com/2006/04/metadata">
+  <fullName>PersonalShoppingBot_v1</fullName>
+  <bot>PersonalShoppingBot</bot>
+  <description>Data-aware bot version with metadata discovery</description>
+  <status>Active</status>
+  <conversationVariables>
+    <fullName>CustomerPreferences</fullName>
+    <dataType>String</dataType>
+  </conversationVariables>
+  <conversationVariables>
+    <fullName>CartValue</fullName>
+    <dataType>Number</dataType>
+  </conversationVariables>
+</BotVersion>

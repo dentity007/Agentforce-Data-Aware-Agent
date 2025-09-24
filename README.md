@@ -1,111 +1,138 @@
-# Agentforce Data-Aware Agent (SFDX)
+# Unified Agentforce Data-Aware Solutions
 
-[![PR Validate (Scratch Org)](https://github.com/dentity007/Agentforce-Data-Aware-Agent/actions/workflows/pr-validate.yml/badge.svg)](https://github.com/dentity007/Agentforce-Data-Aware-Agent/actions/workflows/pr-validate.yml)
+This repository contains **two complementary Salesforce DX projects** that demonstrate advanced AI agent capabilities with data awareness, schema discovery, and governance.
 
-## Description
+## 🎯 Projects Overview
 
-The Agentforce Data-Aware Agent is a comprehensive Salesforce DX template designed to build AI-powered agents that intelligently interact with Salesforce data. This project enables agents to automatically discover your org's schema, understand relationships, and perform safe, governed operations while respecting Field-Level Security (FLS) and sharing rules.
+### 1. **Agentforce Data-Aware Agent** (Lead Qualification)
+- **Purpose**: Intelligent lead qualification and follow-up automation
+- **Key Features**:
+  - Auto-discovers org schema (objects, fields, relationships)
+  - FLS/sharing-aware data operations
+  - Safe SOQL execution with governance
+  - Lead status updates and task creation
+- **Use Case**: Sales operations, lead management
 
-Key capabilities include:
-- **Auto-schema discovery**: Agents dynamically learn about objects, fields, and relationships without manual configuration.
-- **Governance-first**: Built-in FLS enforcement, deny-lists, and audit trails ensure secure and compliant data access.
-- **Extensible architecture**: Modular GenAI functions, planners, and plugins for easy customization.
-- **Production-ready**: Includes CI/CD pipelines, unit tests, and operational tooling.
+### 2. **Personal Shopping Assistant** (E-commerce Bot)
+- **Purpose**: AI-powered shopping assistant with dynamic inventory management
+- **Key Features**:
+  - Dynamic product catalog discovery
+  - Real-time inventory checking
+  - Personalized recommendations
+  - Customer loyalty integration
+  - Shopping cart management
+- **Use Case**: E-commerce, customer service
 
-This template demonstrates a lead qualification use case but can be extended for various business processes.
+## 🚀 Quick Start
 
-## Features
+### Prerequisites
+- **Salesforce CLI** installed (`sf`)
+- **Dev Hub** access for scratch orgs
+- **Developer Edition org** for full bot demos (Einstein Bots enabled)
 
-- **Intelligent Schema Navigation**: Cached schema graph for fast, accurate data discovery.
-- **Safe Data Operations**: FLS-aware queries, Flows, and Apex actions running under user context.
-- **Audit & Compliance**: Comprehensive logging and rollback capabilities.
-- **Multi-Channel Support**: Works with Lightning, Slack, and other Salesforce surfaces.
-- **Performance Optimized**: Efficient queries with limits on rows, fields, and joins.
-- **CI/CD Ready**: GitHub Actions for PR validation with scratch orgs.
+### Deploy Agentforce Data-Aware Agent (Lead Qualification)
 
-## Architecture
+```bash
+# Authenticate
+sf org login web --alias devhub --set-default-dev-hub
 
-The solution follows a layered architecture:
+# Create scratch org
+sf org create scratch --definition-file config/project-scratch-def.json --alias agent-data-aware --set-default --duration-days 7 --wait 10
 
-- **Agent Layer**: Bot definitions, planner bundles, and prompt templates.
-- **Intelligence Layer**: Metadata navigator plugin and schema graph caching.
-- **Execution Layer**: GenAI functions for SOQL execution, Flow runs, and domain-specific actions.
-- **Governance Layer**: Restricted field metadata, audit services, and nightly refresh jobs.
+# Deploy and setup
+sf project deploy start --ignore-conflicts --wait 30
+sf org assign permset --name GenAIAgentPermission
+sf apex run --file scripts/apex/run_bootstrap.apex
+sf org open
 
-For detailed architecture diagrams and sequences, see [docs/diagrams/](docs/diagrams/).
+# Test: "Qualify this lead and follow up: 00Qxxxxxxxxxxxx; set status to Working"
+```
 
-## Prerequisites
+### Deploy Personal Shopping Assistant (E-commerce Bot)
 
-- Salesforce Dev Hub with Scratch Orgs enabled
-- Salesforce CLI (`sf`) installed
-- GitHub repository for CI/CD
-- Connected App for JWT authentication (for CI)
+```bash
+# Use Developer Edition org (required for bots)
+sf org login web --alias DEV_ED
 
-## Installation
+# Deploy full demo with bot
+sf project deploy start -x manifest/full-demo.xml -o DEV_ED
+sf org open -o DEV_ED
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/dentity007/Agentforce-Data-Aware-Agent.git
-   cd agentforce-data-aware
-   ```
+# Access bot at: Setup > Einstein Bots > PersonalShoppingBot
+# Test: "Hi, I'm looking for running shoes under $100"
+```
 
-2. **Authenticate with Dev Hub**:
-   ```bash
-   sf org login web --alias devhub --set-default-dev-hub
-   ```
+## 📁 Project Structure
 
-3. **Create and deploy to Scratch Org**:
-   ```bash
-   sf org create scratch --definition-file config/project-scratch-def.json --alias agent-data-aware --set-default --duration-days 7 --wait 10
-   sf project deploy start --ignore-conflicts --wait 30
-   sf org assign permset --name GenAIAgentPermission
-   sf apex run --file scripts/apex/run_bootstrap.apex
-   sf org open
-   ```
+```
+├── force-app/main/default/
+│   ├── classes/                 # Apex classes for both projects
+│   ├── genAiFunctions/          # GenAI functions
+│   ├── genAiPlannerBundles/     # AI planners
+│   ├── genAiPlugins/           # Metadata plugins
+│   ├── bots/                   # Bot definitions
+│   ├── botVersions/            # Bot versions
+│   ├── objects/                # Custom objects
+│   ├── permissionsets/         # Permission sets
+│   ├── promptTemplates/        # AI prompts
+│   └── flows/                  # Process automation
+├── config/                     # Scratch org config
+├── docs/                       # Documentation
+├── manifest/                   # Deployment manifests
+└── scripts/                    # Setup scripts
+```
 
-## Usage
+## 🔧 Key Components
 
-### Lead Qualification Demo
+### Shared Components
+- **Schema Discovery**: Dynamic org metadata analysis
+- **FLS Enforcement**: Field-level security compliance
+- **Audit Logging**: Operation tracking and compliance
 
-Interact with the bot: "Qualify this lead and follow up: 00Qxxxxxxxxxxxx; set status to Working"
+### Agentforce Data-Aware Agent
+- **AutoDataAwarePlanner**: Lead qualification planner
+- **Lead Management**: Status updates, task creation
+- **SOQL Builder**: Safe query construction
 
-The agent will:
-1. Discover relevant fields and relationships
-2. Execute safe SOQL queries
-3. Update lead status via Flow
-4. Create follow-up tasks via Apex
+### Personal Shopping Assistant
+- **PersonalShoppingPlanner**: Shopping assistance planner
+- **Inventory Management**: Dynamic stock checking
+- **Product Discovery**: Catalog navigation
 
-### Extending the Agent
+## 📚 Documentation
 
-- Add new GenAI functions in `force-app/main/default/genAiFunctions/`
-- Update the planner bundle to include new actions
-- Modify prompts in `force-app/main/default/promptTemplates/`
-- Add tests and update CI
-
-## Documentation
-
-- **[Team Playbook](docs/Team_Playbook.md)**: Complete setup, deployment, and operation guide
-- **[Quick Start 2-Pager](docs/Quick_Start_2Pager.md)**: Executive summary for pilots
+### Agentforce Data-Aware Agent
+- **[Team Playbook](docs/Team_Playbook.md)**: Complete setup and operations
 - **[Solution Architecture](docs/Solution_Architecture.md)**: Technical deep-dive
-- **[Diagrams](docs/diagrams/)**: Visual architecture, flows, and sequences
+- **[Quick Start](docs/Quick_Start_2Pager.md)**: Executive summary
 
-## Contributing
+### Personal Shopping Assistant
+- **[Conversation Demo](docs/conversation-demo.md)**: Sample bot interactions
+- **[Session Guide](docs/today-session.md)**: Technical implementation details
+
+## 🧪 Testing
+
+```bash
+# Run all tests
+sf apex run test --result-format human --code-coverage --wait 30
+
+# Run specific test class
+sf apex run test --tests AgentLeadActionTests --result-format human --wait 10
+```
+
+## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/your-feature`
+2. Create a feature branch
 3. Make changes and add tests
-4. Run tests: `sf apex run test --wait 10 --resultformat human`
-5. Submit a pull request
+4. Submit a pull request
 
-PRs are validated automatically with scratch org deployment and test execution.
+## 📄 License
 
-## License
+This project is licensed under the MIT License.
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+## 🆘 Support
 
-## Support
-
-For issues or questions:
-- Check the [Team Playbook](docs/Team_Playbook.md) for common setup problems
-- Open an issue on GitHub
-- Review audit logs in Salesforce for runtime issues
+- Check documentation in `docs/` folder
+- Review GitHub Actions workflow logs
+- Open issues for bugs or feature requests
