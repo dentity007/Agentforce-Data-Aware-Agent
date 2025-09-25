@@ -57,47 +57,112 @@ Prompt templates provide structured, reusable instructions for AI agents that:
 }
 ```
 
-### 2. PersonalShoppingRecommendation.prompt
+### 3. LoanEligibility.prompt
 
-**Purpose**: E-commerce product recommendations with inventory awareness
+**Purpose**: Financial loan eligibility assessment with compliance and PII protection
 
 **Key Features**:
-- Dynamic product catalog discovery
-- Price range filtering
-- Inventory availability checking
-- Knowledge-grounded recommendations
-- Relationship-aware queries
+- PII detection and masking using PrivacyGuard
+- Risk assessment based on financial data
+- Compliance with lending regulations
+- Automated decision workflows
 
 **Use Cases**:
-- Personalized product suggestions
-- Inventory-aware shopping assistance
-- Price comparison and recommendations
-- Customer service automation
+- Loan application processing
+- Credit risk assessment
+- Financial service automation
+- Compliance reporting
 
 **Inputs Required**:
-- `user_query`: Customer shopping request
+- `applicant_data`: Customer financial information
 - `schema_json`: Discovered org schema
-- `data_cloud_context`: Knowledge base context (optional)
-- `inventory_context`: Current stock data (optional)
-- `price_range`: Budget constraints (optional)
-- `candidate_products_json`: Pre-filtered suggestions (optional)
+- `risk_parameters`: Lending criteria and thresholds
+- `compliance_requirements`: Regulatory constraints
 
 **Output Format**:
 ```json
 {
+  "eligibility_assessment": {
+    "eligible": true,
+    "risk_score": 0.85,
+    "approved_amount": 50000,
+    "terms": "5-year fixed"
+  },
+  "soql_blueprints": [{
+    "rootObject": "Account",
+    "fields": ["Id", "Credit_Score__c", "Annual_Revenue__c"],
+    "filters": [{"fieldRef": "Id", "op": "=", "valueRef": "account_id"}]
+  }],
+  "followups": ["Additional documentation required"],
+  "rationale": "Eligibility determination logic"
+}
+```
+
+### 4. InventoryCheck.prompt
+
+**Purpose**: Real-time inventory verification and stock management
+
+**Key Features**:
+- Dynamic catalog field discovery
+- Stock level monitoring and alerts
+- Multi-location inventory tracking
+- Automated reorder point calculations
+
+**Use Cases**:
+- E-commerce inventory management
+- Supply chain optimization
+- Stock level monitoring
+- Automated procurement alerts
+
+**Inputs Required**:
+- `product_query`: Item to check inventory for
+- `schema_json`: Discovered org schema
+- `location_filters`: Warehouse or store filters
+- `threshold_settings`: Reorder point configurations
+
+**Output Format**:
+```json
+{
+  "inventory_status": {
+    "product_id": "01txxxxxxxxxxxx",
+    "available_quantity": 150,
+    "locations": [
+      {"warehouse": "Main", "quantity": 100},
+      {"warehouse": "Secondary", "quantity": 50}
+    ],
+    "reorder_needed": false
+  },
   "soql_blueprints": [{
     "rootObject": "Product2",
-    "fields": ["Id", "Name", "Price", "Inventory"],
-    "filters": [
-      {"fieldRef": "Inventory", "op": ">", "valueRef": "0"},
-      {"fieldRef": "Price", "op": "<=", "valueRef": "100"}
-    ],
-    "orderBy": [{"fieldRef": "Price", "direction": "ASC"}],
-    "limit": 10
+    "fields": ["Id", "Name", "Stock_Level__c", "Reorder_Point__c"],
+    "filters": [{"fieldRef": "Id", "op": "=", "valueRef": "product_id"}]
   }],
-  "chosen_fields": {
-    "Product2": ["Id", "Name", "Price", "Inventory"]
-  },
+  "alerts": ["Low stock warning for Product X"],
+  "rationale": "Inventory assessment logic"
+}
+```
+
+### 5. DataAwarePrompt.prompt
+
+**Purpose**: General-purpose data operations with full schema awareness
+
+**Key Features**:
+- Universal schema discovery and utilization
+- Flexible query and update operations
+- Knowledge integration capabilities
+- Comprehensive audit logging
+
+**Use Cases**:
+- Generic data operations
+- Custom business logic implementation
+- Multi-object data processing
+- Complex workflow automation
+
+**Inputs Required**:
+- `user_instruction`: Natural language operation request
+- `schema_json`: Complete org schema discovery
+- `context_data`: Additional operational context
+- `constraints`: Operational boundaries and limits
   "followups": ["Preference questions"],
   "rationale": "Recommendation logic explanation"
 }

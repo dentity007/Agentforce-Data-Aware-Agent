@@ -1,0 +1,18 @@
+{
+  "objects": [
+    {
+      "apiName": "Opportunity",
+      "fields": ["Id", "Name", "StageName", "Amount", "CloseDate", "AccountId"],
+      "piiFieldsRemoved": []
+    },
+    {
+      "apiName": "Account",
+      "fields": ["Id", "Name", "Industry", "AnnualRevenue"],
+      "piiFieldsRemoved": []
+    }
+  ],
+  "relationships": [
+    { "parent": "Account", "child": "Opportunity", "type": "lookup", "field": "AccountId" }
+  ],
+  "tokenBudget": 420
+}

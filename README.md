@@ -65,6 +65,16 @@ The project includes **structured prompt templates** that enable schema-aware ag
 - **Features**: Price filtering, stock checking, knowledge-grounded suggestions
 - **Use Case**: Customer service, personalized shopping assistance
 
+#### **LoanEligibility.prompt**
+- **Purpose**: Financial loan eligibility assessment with compliance
+- **Features**: PII protection, risk assessment, automated decision workflows
+- **Use Case**: Financial services, loan processing automation
+
+#### **InventoryCheck.prompt**
+- **Purpose**: Real-time inventory verification and stock management
+- **Features**: Dynamic catalog checking, stock level monitoring, automated alerts
+- **Use Case**: E-commerce, supply chain management
+
 ### **Key Benefits:**
 - 🔍 **Schema-Aware**: No hard-coded field names or SOQL
 - 🛡️ **Governed**: FLS and sharing rule compliance
@@ -140,38 +150,50 @@ sf org open -o DEV_ED
 
 ```
 ├── force-app/main/default/
-│   ├── classes/                 # Apex classes for both projects
-│   ├── genAiFunctions/          # GenAI functions
-│   ├── genAiPlannerBundles/     # AI planners
-│   ├── genAiPlugins/           # Metadata plugins
+│   ├── classes/                 # Apex classes (35+ classes including tests)
+│   │   └── tests/              # Comprehensive test suite
+│   ├── genAiFunctions/          # 11 GenAI functions for data operations
+│   ├── genAiPlannerBundles/     # AI planners for orchestration
+│   ├── genAiPlugins/           # Metadata navigation plugins
 │   ├── bots/                   # Bot definitions
 │   ├── botVersions/            # Bot versions
-│   ├── objects/                # Custom objects
-│   ├── permissionsets/         # Permission sets
-│   ├── promptTemplates/        # AI prompts
-│   └── flows/                  # Process automation
-├── config/                     # Scratch org config
-├── docs/                       # Documentation
+│   ├── objects/                # Custom objects (SchemaGraph__c)
+│   ├── permissionsets/         # Permission sets (GenAIAgentPermission)
+│   ├── promptTemplates/        # 5 AI prompt templates
+│   ├── flows/                  # Process automation flows
+│   └── staticresources/        # LLM contracts and test fixtures
+├── config/                     # Scratch org configuration
+├── docs/                       # Comprehensive documentation
 ├── manifest/                   # Deployment manifests
-└── scripts/                    # Setup and scaffolding scripts
+├── scripts/                    # Setup and scaffolding scripts
+│   ├── scaffold.sh            # Project scaffolding tool
+│   ├── dev-setup.sh           # One-command org setup
+│   └── bootstrap_repo.sh      # Repository initialization
+└── data/                      # Sample data and fixtures
 ```
 
 ## 🔧 Key Components
 
-### Shared Components
-- **Schema Discovery**: Dynamic org metadata analysis
-- **FLS Enforcement**: Field-level security compliance
-- **Audit Logging**: Operation tracking and compliance
+### Core Apex Classes (35+ Classes)
+- **Schema Discovery**: `MetadataDiscovery`, `SchemaSlicer`, `OrgSchemaBootstrap`
+- **Data Operations**: `SOQLBuilder`, `SafeQueryApex`, `DataCloudQueryApex`
+- **Security & Governance**: `FLS`, `PrivacyGuard`, `JSONUtil`
+- **AI Integration**: `Planner`, `ActionOrchestrator`, `DomainActionRegistry`
+- **Business Logic**: `LeadQualificationAction`, `LeadScoreService`, `FollowUpApex`
+- **Knowledge Integration**: `KnowledgeRetrieverApex` (RAG fallback)
+- **Testing**: Comprehensive test suite with 6 test classes
 
-### Agentforce Data-Aware Agent
-- **AutoDataAwarePlanner**: Lead qualification planner
-- **Lead Management**: Status updates, task creation
-- **SOQL Builder**: Safe query construction
+### GenAI Functions (11 Functions)
+- **Data Operations**: `ExecuteSOQL`, `FindFields`, `FindObjects`, `FindRelationshipPath`
+- **AI Actions**: `QueryDataCloud`, `RunFlow`, `TriggerFollowUpAction`, `UpdateLeadStatusAction`
+- **Business Logic**: `CheckInventoryAction`, `DiscoverMetadataAction`, `RetrieveKnowledgeSnippets`
 
-### Personal Shopping Assistant
-- **PersonalShoppingPlanner**: Shopping assistance planner
-- **Inventory Management**: Dynamic stock checking
-- **Product Discovery**: Catalog navigation
+### Prompt Templates (5 Templates)
+- **LeadQualification**: Sales automation with schema awareness
+- **PersonalShoppingRecommendation**: E-commerce with inventory checking
+- **LoanEligibility**: Financial services with PII protection
+- **InventoryCheck**: Supply chain management
+- **DataAwarePrompt**: General-purpose data operations
 
 ## 📚 Documentation
 
@@ -198,11 +220,15 @@ sf org open -o DEV_ED
 ## 🧪 Testing
 
 ```bash
-# Run all tests
+# Run all tests (35+ Apex classes, 6 dedicated test classes)
 sf apex run test --result-format human --code-coverage --wait 30
 
-# Run specific test class
-sf apex run test --tests AgentLeadActionTests --result-format human --wait 10
+# Run specific test classes
+sf apex run test --tests AgentLeadActionTests,AgentQueryTests,AgentSchemaTests --result-format human --wait 10
+sf apex run test --tests MetadataDiscoveryTests,PlannerAndOrchestratorTests,PrivacyGuardTests,SchemaSlicerTests --result-format human --wait 10
+
+# Run with code coverage requirements
+sf apex run test --result-format human --code-coverage --coverage-threshold 75 --wait 30
 ```
 
 ## 🤝 Contributing

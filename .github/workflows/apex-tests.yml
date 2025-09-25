@@ -1,0 +1,24 @@
+name: Apex Tests
+on:
+  pull_request:
+  push:
+    branches: [ main, master ]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: sfdx-actions/setup-sfdx@v1
+      - name: Auth Dev Hub
+        run: echo "${{ secrets.SFDX_URL }}" > sfdx_auth.txt && sfdx auth:sfdxurl:store -f sfdx_auth.txt -a devhub
+      - name: Create Scratch Org
+        run: sfdx force:org:create -s -f config/project-scratch-def.json -a ci-org -d 1
+      - name: Push Source
+        run: sfdx force:source:push -u ci-org
+      - name: Assign Permset
+        run: sfdx force:user:permset:assign -n GenAIAgentPermission -u ci-org || true
+      - name: Run Tests
+        run: sfdx force:apex:test:run -u ci-org -r human -c -w 30
+      - name: Delete Scratch Org
+        if: always()
+        run: sfdx force:org:delete -u ci-org -p

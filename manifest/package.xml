@@ -1,8 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
   <types>
+    <members>ActionOrchestrator</members>
+    <members>AgentLeadActionTests</members>
+    <members>AgentQueryTests</members>
+    <members>AgentSchemaTests</members>
+    <members>CodeGenService</members>
+    <members>DataCloudQueryApex</members>
+    <members>DomainActionRegistry</members>
+    <members>FLS</members>
+    <members>FollowUpApex</members>
+    <members>InventoryCheckInvoker</members>
+    <members>InvocableActionFactory</members>
+    <members>JSONUtil</members>
     <members>KnowledgeRetrieverApex</members>
     <members>KnowledgeRetrieverApex_Test</members>
+    <members>LeadQualificationAction</members>
+    <members>LeadScoreService</members>
+    <members>MetadataDiscoverApex</members>
+    <members>MetadataDiscovery</members>
+    <members>MetadataDiscoveryTests</members>
+    <members>MetadataNavigatorApex</members>
+    <members>OrgSchemaBootstrap</members>
+    <members>OrgSchemaNightlyJob</members>
+    <members>PlanModels</members>
+    <members>Planner</members>
+    <members>PlannerAndOrchestratorTests</members>
+    <members>PrivacyGuard</members>
+    <members>PrivacyGuardTests</members>
+    <members>SOQLBuilder</members>
+    <members>SafeQueryApex</members>
+    <members>SchemaGraphStore</members>
+    <members>SchemaSlicer</members>
+    <members>SchemaSlicerTests</members>
     <name>ApexClass</name>
   </types>
   <types>
@@ -44,7 +74,9 @@
   </types>
   <types>
     <members>DataAwarePrompt</members>
+    <members>InventoryCheck</members>
     <members>LeadQualification</members>
+    <members>LoanEligibility</members>
     <members>PersonalShoppingRecommendation</members>
     <name>PromptTemplate</name>
   </types>
@@ -55,6 +87,11 @@
   <types>
     <members>GenAIAgentPermission</members>
     <name>PermissionSet</name>
+  </types>
+  <types>
+    <members>llm_contracts</members>
+    <members>meeting_fixtures</members>
+    <name>StaticResource</name>
   </types>
   <version>64.0</version>
 </Package>

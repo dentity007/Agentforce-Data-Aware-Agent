@@ -1,15 +1,23 @@
-# Agentforce Data‑Aware Agent — Quick Start (Exec & PM 2‑Pager)
+# Agentforce Data‑Aware Solutions — Quick Start (Exec & PM 2‑Pager)
 
 **Why**: Faster ops, no manual field mapping, governed (FLS, deny‑list), auditable.  
 **Pilot metric ideas**: +30% triage speed, +15% timely follow‑ups, <1% permission violations.
 
 ## Scope (4–6 weeks)
-- Use case: Lead qualification & follow‑up
-- Surfaces: Lightning / Slack (optional)
-- Data: Lead (+ related minimal fields), PII deny‑listed
+Two complementary AI agent solutions:
+
+### Agentforce Data-Aware Agent
+- **Use case**: Lead qualification & follow‑up automation
+- **Surfaces**: Lightning / Slack (optional)
+- **Data**: Lead (+ related minimal fields), PII deny‑listed
+
+### Personal Shopping Assistant
+- **Use case**: AI-powered e-commerce customer service
+- **Surfaces**: Einstein Bots, customer portals
+- **Data**: Product catalog, inventory, customer preferences
 
 ## RACI (pilot)
-Sponsor (A), PM (A), Admin (R), Dev (R), Security (C), Sales Ops (C).
+Sponsor (A), PM (A), Admin (R), Dev (R), Security (C), Sales Ops (C), E-commerce (C).
 
 ## Environments
 Dev Hub + Scratch (CI on PRs) → UAT Sandbox → Production
