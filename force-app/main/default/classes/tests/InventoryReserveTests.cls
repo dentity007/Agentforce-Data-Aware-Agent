@@ -2,6 +2,10 @@
 private class InventoryReserveTests {
     @IsTest
     static void testInventoryReserveCreatesTask() {
+        // Create test Account
+        Account acc = new Account(Name = 'Test Account');
+        insert acc;
+
         // Test the InventoryReserve action directly
         InvocableActionFactory.InventoryReserve action = new InvocableActionFactory.InventoryReserve();
 
@@ -9,7 +13,7 @@ private class InventoryReserveTests {
         Map<String, Object> input = new Map<String, Object>{
             'Product2Id' => '01t000000000001',
             'Quantity' => 3,
-            'AccountId' => '001000000000001'
+            'AccountId' => acc.Id
         };
 
         // Count Tasks before
@@ -34,8 +38,8 @@ private class InventoryReserveTests {
         System.assertEquals('Not Started', inserted.Status);
         System.assert(inserted.Description.contains('Product2Id: 01t000000000001'), 'Description should include Product2Id');
         System.assert(inserted.Description.contains('Quantity: 3'), 'Description should include Quantity');
-        System.assert(inserted.Description.contains('AccountId: 001000000000001'), 'Description should include AccountId');
-        System.assertEquals('001000000000001', inserted.WhatId, 'Task should be related to the Account');
+        System.assert(inserted.Description.contains('AccountId: ' + acc.Id), 'Description should include AccountId');
+        System.assertEquals(acc.Id, inserted.WhatId, 'Task should be related to the Account');
     }
 
     @IsTest
