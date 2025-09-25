@@ -1,6 +1,7 @@
 # Salesforce DX
 .sfdx/
 .salesforce/
+.sf/
 
 # Node.js dependencies
 node_modules/
