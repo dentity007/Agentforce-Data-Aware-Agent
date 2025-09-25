@@ -247,6 +247,10 @@ sf apex run test --result-format human --code-coverage --coverage-threshold 75 -
 
 This project is licensed under the MIT License.
 
+## 📋 Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for detailed version history and updates.
+
 ## 🆘 Support
 
 - Check documentation in `docs/` folder

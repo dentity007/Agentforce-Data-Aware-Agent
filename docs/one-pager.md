@@ -10,6 +10,7 @@ Enables secure, schema-aware AI agents inside any Salesforce org:
 - **Safe execution**: FLS/sharing enforced; confirmation checkpoint; Business Rules Agent coupling.
 - **Demos**: Lead Qualification, Personal Shopping; plus Inventory Check & Loan Eligibility.
 - **Portable**: Re-slice/re-plan across orgs without code edits.
+- **Latest**: v0.3.0 with fixed Inventory Reserve actions and comprehensive test coverage.
 
 ## Value
 - **Privacy-first**: Zero PII leakage; proven via red-team tests.
