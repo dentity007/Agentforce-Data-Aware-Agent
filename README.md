@@ -197,6 +197,11 @@ sf org open -o DEV_ED
 
 ## 📚 Documentation
 
+### Project Overview
+- **[Master Roadmap](docs/master-roadmap.md)**: Complete project summary, architecture, and roadmap
+- **[One-Pager](docs/one-pager.md)**: Executive summary of capabilities and value proposition
+- **[LLM I/O Contract](docs/README-LLM-IO.md)**: Technical specification for AI model interfaces
+
 ### Agentforce Data-Aware Agent
 - **[Team Playbook](docs/Team_Playbook.md)**: Complete setup and operations
 - **[Solution Architecture](docs/Solution_Architecture.md)**: Technical deep-dive
