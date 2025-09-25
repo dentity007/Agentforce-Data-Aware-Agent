@@ -13,8 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Package Manifest**: Added missing `InventoryReserveTests` to `manifest/package.xml` for complete deployment coverage
 
 ### Added
-- **Missing Source Files**: Created placeholder `.genaiFunction`, `.genaiPlannerBundle`, `.genaiPlugin`, and `.promptTemplate` files to satisfy Salesforce CLI deployment requirements
-- **Test Coverage**: Comprehensive test suite for InventoryReserve action with 100% pass rate (3 test methods covering success, validation, and edge cases)
+- **Planner Routing**: Automatic action selection based on goal keywords
+  - Routes to `InventoryReserve` when goal contains "inventory", "stock", or "reserve"
+  - Defaults to `UpdateOpportunityStage` for other goals
+  - Maintains backward compatibility
+- **PlannerRouteTests.cls**: Test coverage for routing logic (2 tests, 100% pass rate)
 
 ### Changed
 - **Inventory Reserve Action**: Improved error handling and input validation in the DOMAIN action for better reliability
