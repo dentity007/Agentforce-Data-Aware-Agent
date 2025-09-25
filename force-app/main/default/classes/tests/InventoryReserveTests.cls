@@ -2,79 +2,97 @@
 private class InventoryReserveTests {
     @IsTest
     static void testInventoryReserveCreatesTask() {
-        // Build a minimal plan that includes the InventoryReserve action
-        PlanModels.Plan p = new PlanModels.Plan();
-        p.capabilities = new List<String>{'DOMAIN'};
-        p.steps = new List<String>{'Choose actions'};
-        p.dependencies = new List<String>{'FLS','Sharing'};
-        p.checkpointText = 'Reserve inventory confirmation';
+        // Test the InventoryReserve action directly
+        InvocableActionFactory.InventoryReserve action = new InvocableActionFactory.InventoryReserve();
 
-        PlanModels.ActionDef a = new PlanModels.ActionDef();
-        a.name = 'InventoryReserve';
-        a.type = 'DOMAIN';
-        a.sobjectApiName = 'Task';
-        a.fields = new Map<String, Object>{
-            'Product2Id' => null,
-            'Quantity'   => null,
-            'AccountId'  => null
-        };
-        a.guardrails = new Map<String, Object>{ 'requireFLS' => true, 'requireSharing' => true };
-        p.actions = new List<PlanModels.ActionDef>{ a };
-
-        // Prepare user inputs (use a fake Product2 Id format is okay; we store it in Task.Description)
-        Map<String, Object> inputs = new Map<String, Object>{
-            'InventoryReserve' => new Map<String, Object>{
-                'Product2Id' => '01t000000000001', // placeholder Id format for Product2
-                'Quantity'   => 3,
-                // 'AccountId' can be omitted in test; Task relates without WhatId
-            }
+        // Prepare input data
+        Map<String, Object> input = new Map<String, Object>{
+            'Product2Id' => '01t000000000001',
+            'Quantity' => 3,
+            'AccountId' => '001000000000001'
         };
 
         // Count Tasks before
         Integer beforeCount = [SELECT count() FROM Task];
 
-        // Run orchestrator with confirmation
-        PlanModels.OrchestratorResult r = ActionOrchestrator.run(p, inputs, true);
-        System.assertEquals(true, r.success, 'Orchestrator should succeed');
+        // Execute the action
+        Test.startTest();
+        PlanModels.OrchestratorResult result = action.execute(input);
+        Test.stopTest();
+
+        // Verify success
+        System.assertEquals(true, result.success, 'Action should succeed');
 
         // Verify a Task was created
         Integer afterCount = [SELECT count() FROM Task];
         System.assertEquals(beforeCount + 1, afterCount, 'One Task should be inserted');
 
-        // Optional: fetch the Task and verify content
-        Task inserted = [SELECT Id, Subject, Priority, Status, Description FROM Task ORDER BY CreatedDate DESC LIMIT 1];
+        // Verify Task content
+        Task inserted = [SELECT Id, Subject, Priority, Status, Description, WhatId FROM Task ORDER BY CreatedDate DESC LIMIT 1];
         System.assertEquals('Inventory Reserve', inserted.Subject);
         System.assertEquals('High', inserted.Priority);
         System.assertEquals('Not Started', inserted.Status);
         System.assert(inserted.Description.contains('Product2Id: 01t000000000001'), 'Description should include Product2Id');
         System.assert(inserted.Description.contains('Quantity: 3'), 'Description should include Quantity');
+        System.assert(inserted.Description.contains('AccountId: 001000000000001'), 'Description should include AccountId');
+        System.assertEquals('001000000000001', inserted.WhatId, 'Task should be related to the Account');
     }
 
     @IsTest
     static void testInventoryReserveValidatesInputs() {
-        // Missing Quantity → should fail
-        PlanModels.Plan p = new PlanModels.Plan();
-        p.capabilities = new List<String>{'DOMAIN'};
-        p.steps = new List<String>{'Choose actions'};
-        p.dependencies = new List<String>{'FLS','Sharing'};
-        p.checkpointText = 'Reserve inventory confirmation';
+        InvocableActionFactory.InventoryReserve action = new InvocableActionFactory.InventoryReserve();
 
-        PlanModels.ActionDef a = new PlanModels.ActionDef();
-        a.name = 'InventoryReserve';
-        a.type = 'DOMAIN';
-        a.sobjectApiName = 'Task';
-        a.fields = new Map<String, Object>{ 'Product2Id' => null, 'Quantity' => null };
-        a.guardrails = new Map<String, Object>{ 'requireFLS' => true, 'requireSharing' => true };
-        p.actions = new List<PlanModels.ActionDef>{ a };
-
-        Map<String, Object> badInputs = new Map<String, Object>{
-            'InventoryReserve' => new Map<String, Object>{
-                'Product2Id' => '01t000000000001'
-                // Quantity missing
-            }
+        // Test missing Quantity
+        Map<String, Object> badInput1 = new Map<String, Object>{
+            'Product2Id' => '01t000000000001'
+            // Quantity missing
         };
 
-        PlanModels.OrchestratorResult r = ActionOrchestrator.run(p, badInputs, true);
-        System.assertEquals(false, r.success, 'Should fail without Quantity');
+        PlanModels.OrchestratorResult result1 = action.execute(badInput1);
+        System.assertEquals(false, result1.success, 'Should fail without Quantity');
+        System.assert(result1.errors[0].contains('Missing required field: Quantity'), 'Should mention missing Quantity');
+
+        // Test missing Product2Id
+        Map<String, Object> badInput2 = new Map<String, Object>{
+            'Quantity' => 5
+            // Product2Id missing
+        };
+
+        PlanModels.OrchestratorResult result2 = action.execute(badInput2);
+        System.assertEquals(false, result2.success, 'Should fail without Product2Id');
+        System.assert(result2.errors[0].contains('Missing required field: Product2Id'), 'Should mention missing Product2Id');
+
+        // Test invalid Quantity
+        Map<String, Object> badInput3 = new Map<String, Object>{
+            'Product2Id' => '01t000000000001',
+            'Quantity' => 'invalid'
+        };
+
+        PlanModels.OrchestratorResult result3 = action.execute(badInput3);
+        System.assertEquals(false, result3.success, 'Should fail with invalid Quantity');
+        System.assert(result3.errors[0].contains('Invalid Quantity'), 'Should mention invalid Quantity');
+    }
+
+    @IsTest
+    static void testInventoryReserveWithoutAccountId() {
+        InvocableActionFactory.InventoryReserve action = new InvocableActionFactory.InventoryReserve();
+
+        // Test without AccountId (should still work)
+        Map<String, Object> input = new Map<String, Object>{
+            'Product2Id' => '01t000000000001',
+            'Quantity' => 2
+            // No AccountId
+        };
+
+        Test.startTest();
+        PlanModels.OrchestratorResult result = action.execute(input);
+        Test.stopTest();
+
+        System.assertEquals(true, result.success, 'Action should succeed without AccountId');
+
+        // Verify Task was created without WhatId
+        Task inserted = [SELECT Id, WhatId, Description FROM Task ORDER BY CreatedDate DESC LIMIT 1];
+        System.assertEquals(null, inserted.WhatId, 'Task should not have WhatId when no AccountId provided');
+        System.assert(!inserted.Description.contains('AccountId'), 'Description should not include AccountId');
     }
 }
