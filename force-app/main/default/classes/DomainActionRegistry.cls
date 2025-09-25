@@ -21,6 +21,14 @@ public with sharing class DomainActionRegistry {
         t2.sobjectApiName = 'Generic__c';
         t2.requiredFields = new List<String>{'Id'};
         r.put(t2.name, t2);
+
+        Template t3 = new Template();
+        t3.name = 'InventoryReserve';
+        t3.type = 'DOMAIN';
+        t3.sobjectApiName = 'Task'; // reservation represented as a Task
+        t3.requiredFields = new List<String>{'Product2Id','Quantity'}; // AccountId optional
+        r.put(t3.name, t3);
+
         return r;
     }
 }
