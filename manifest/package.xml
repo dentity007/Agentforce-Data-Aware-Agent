@@ -33,6 +33,7 @@
     <members>SchemaGraphStore</members>
     <members>SchemaSlicer</members>
     <members>SchemaSlicerTests</members>
+    <members>InventoryReserveTests</members>
     <name>ApexClass</name>
   </types>
   <types>
