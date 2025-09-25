@@ -81,6 +81,30 @@ The project includes **structured prompt templates** that enable schema-aware ag
 - **Dev Hub** access for scratch orgs
 - **Developer Edition org** for full bot demos (Einstein Bots enabled)
 
+### Development Tools
+
+This project includes a scaffolding script to help with common development tasks:
+
+```bash
+# Make the script executable (one-time setup)
+chmod +x scripts/scaffold.sh
+
+# Setup development environment
+./scripts/scaffold.sh setup dev
+
+# Create new components
+./scripts/scaffold.sh create class MyNewClass
+./scripts/scaffold.sh create trigger MyTrigger Account
+./scripts/scaffold.sh create lwc myComponent
+
+# Deploy and test
+./scripts/scaffold.sh deploy
+./scripts/scaffold.sh test
+
+# See all available commands
+./scripts/scaffold.sh help
+```
+
 ### Deploy Agentforce Data-Aware Agent (Lead Qualification)
 
 ```bash
@@ -129,7 +153,7 @@ sf org open -o DEV_ED
 ├── config/                     # Scratch org config
 ├── docs/                       # Documentation
 ├── manifest/                   # Deployment manifests
-└── scripts/                    # Setup scripts
+└── scripts/                    # Setup and scaffolding scripts
 ```
 
 ## 🔧 Key Components
