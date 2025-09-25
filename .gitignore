@@ -50,3 +50,7 @@ build/
 # Sensitive data
 config/private/
 secrets/
+*.pem
+*.key
+*.crt
+secrets/
