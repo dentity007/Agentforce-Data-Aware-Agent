@@ -31,8 +31,10 @@ public with sharing class Planner {
                 'AccountId'  => null // optional
             };
             a.guardrails = new Map<String, Object>{
-                'requireFLS'     => true,
-                'requireSharing' => true
+                'requireFLS'      => true,
+                'requireSharing'  => true,
+                'optionalFields'  => (Object) new List<String>{ 'AccountId' },
+                'numericFields'   => (Object) new List<String>{ 'Quantity' }
             };
             p.actions = new List<PlanModels.ActionDef>{ a };
             p.checkpointText = 'I will create a high-priority Task to reserve inventory. Proceed?';
