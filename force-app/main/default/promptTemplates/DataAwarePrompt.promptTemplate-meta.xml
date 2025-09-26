@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<PromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
-  <fullName>DataAwarePrompt</fullName>
-  <description>Inject a minimal schema slice and governance rules.</description>
-  <content>
-Use professional tone. Before answering, identify the minimal object/field set.
-Avoid sensitive fields unless explicitly permitted. Cite objects/fields used.
-  </content>
-</PromptTemplate>
