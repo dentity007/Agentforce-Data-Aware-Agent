@@ -1,7 +1,7 @@
 # Agentforce Data-Aware Agent
 
 [![Agentforce: Data‑Aware Ready](https://img.shields.io/badge/Agentforce-Data%E2%80%91Aware%20Ready-00A1E0)](docs/data-library/SETUP.md)
-[![Latest Release](https://img.shields.io/badge/release-v0.3.0-blue)](https://github.com/dentity007/Agentforce-Data-Aware-Agent/releases/tag/v0.3.0)
+[![Latest Release](https://img.shields.io/github/v/release/dentity007/Agentforce-Data-Aware-Agent)](https://github.com/dentity007/Agentforce-Data-Aware-Agent/releases/latest)
 [![Test Coverage](https://img.shields.io/badge/tests-100%25%20pass-green)](https://github.com/dentity007/Agentforce-Data-Aware-Agent)
 
 An intelligent Salesforce agent that combines **schema discovery**, **dynamic action routing**, **input validation**, and **knowledge-grounded responses** for enterprise-grade AI automation.
@@ -260,6 +260,33 @@ sf apex run test --tests MetadataDiscoveryTests,PlannerAndOrchestratorTests,Priv
 
 # Run with coverage requirements
 sf apex run test --result-format human --code-coverage --coverage-threshold 75 --wait 30
+```
+
+## 🚀 Automated Releases
+
+This project uses **semantic versioning** with automated release management:
+
+### **How It Works**
+- **Conventional Commits**: Version bumps based on commit message prefixes:
+  - `feat:` → Minor version bump (1.0.0 → 1.1.0)
+  - `fix:` → Patch version bump (1.0.0 → 1.0.1)
+  - `BREAKING CHANGE:` → Major version bump (1.0.0 → 2.0.0)
+- **Automated Process**: GitHub Actions automatically creates releases on pushes to `main`/`master`
+- **Changelog Generation**: Release notes are automatically generated from commit messages
+
+### **Release Process**
+1. **Make Changes**: Commit with conventional commit format
+2. **Push to Main**: Triggers automated release workflow
+3. **Automatic Release**: Version bump, tag creation, and GitHub release
+4. **Changelog Update**: Release notes added to CHANGELOG.md
+
+### **Example Commits**
+```bash
+git commit -m "feat: add intelligent inventory routing"
+git commit -m "fix: resolve checkpoint guard validation bug"
+git commit -m "feat: implement knowledge-grounded responses
+
+BREAKING CHANGE: updated action interface"
 ```
 
 ## 🤝 Contributing

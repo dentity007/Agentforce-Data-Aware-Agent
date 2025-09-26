@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0] - 2024-12-19
+
+### Added
+- **Automated Release Management**: Implemented semantic versioning with GitHub Actions
+  - Conventional commits trigger automatic version bumps
+  - Automated changelog generation and GitHub releases
+  - Release-please integration for streamlined release process
+
+### Changed
+- **Release Badge**: Updated README to use dynamic release badge from GitHub releases
+- **Documentation**: Added automated releases section explaining semantic versioning process
+
 ## [0.3.0] - 2025-09-25
 
 ### Fixed

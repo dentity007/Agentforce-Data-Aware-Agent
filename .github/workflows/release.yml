@@ -1,0 +1,28 @@
+name: Release
+
+on:
+  push:
+    branches: [ main, master ]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Release Please
+        uses: google-github-actions/release-please-action@v4
+        id: release
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          release-type: simple
+      - name: Tag Release
+        if: ${{ steps.release.outputs.release_created }}
+        run: |
+          git tag -f v${{ steps.release.outputs.tag_name }}
+          git push origin v${{ steps.release.outputs.tag_name }} --force
