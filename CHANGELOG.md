@@ -13,11 +13,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Package Manifest**: Added missing `InventoryReserveTests` to `manifest/package.xml` for complete deployment coverage
 
 ### Added
-- **Planner Routing**: Automatic action selection based on goal keywords
-  - Routes to `InventoryReserve` when goal contains "inventory", "stock", or "reserve"
-  - Defaults to `UpdateOpportunityStage` for other goals
-  - Maintains backward compatibility
-- **PlannerRouteTests.cls**: Test coverage for routing logic (2 tests, 100% pass rate)
+- **Checkpoint Guard System**: Input validation before database operations
+  - `ActionOrchestrator` now validates required/optional fields and numeric values before DML
+  - Blocks execution with clear error messages for missing or invalid inputs
+  - Prevents database operations until all guardrails pass
+- **Enhanced Guardrails**: Support for `optionalFields` and `numericFields` in action definitions
+  - `InventoryReserve` marks `AccountId` as optional and `Quantity` as numeric (> 0)
+  - Extensible framework for future validation rules
+- **OrchestratorCheckpointGuardTests.cls**: Comprehensive test coverage (3 tests, 100% pass rate)
+  - Tests missing required fields, invalid numeric values, and valid inputs
+  - Validates guard blocks database operations appropriately
 
 ### Changed
 - **Inventory Reserve Action**: Improved error handling and input validation in the DOMAIN action for better reliability
