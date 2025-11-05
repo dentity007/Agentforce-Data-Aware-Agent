@@ -1,4 +1,4 @@
-# Agentforce Data-Aware Agent
+# Agentforce Data-Aware Agent POC
 
 [![Agentforce: Data‑Aware Ready](https://img.shields.io/badge/Agentforce-Data%E2%80%91Aware%20Ready-00A1E0)](docs/data-library/SETUP.md)
 [![Latest Release](https://img.shields.io/github/v/release/dentity007/Agentforce-Data-Aware-Agent)](https://github.com/dentity007/Agentforce-Data-Aware-Agent/releases/latest)
